@@ -9,9 +9,9 @@ import (
 
 func main() {
 	ctx := log.WithContext(context.Background(), log.New())
-	app := app.New()
+	a := app.New()
 
-	if err := app.Run(ctx); err != nil {
+	if err := a.Run(ctx); err != nil {
 		log.FromContext(ctx).Error(err.Error())
 		os.Exit(1)
 	}

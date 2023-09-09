@@ -13,10 +13,9 @@ func New() *App {
 	return &App{}
 }
 
-var (
-	hostArg       string
-	instanceIpArg string
-)
+//var (
+//	hostArg string
+//)
 
 func (a *App) Run(ctx context.Context) error {
 	rootCmd := cobra.Command{
@@ -28,14 +27,13 @@ func (a *App) Run(ctx context.Context) error {
 		Use:   "create-instance",
 		Short: "Create a new instance",
 		Run: func(cmd *cobra.Command, args []string) {
-			if err := runCreateInstanceCmd(ctx, hostArg, instanceIpArg); err != nil {
+			if err := runCreateInstanceCmd(ctx); err != nil {
 				log.FromContext(ctx).Error(err.Error())
 				os.Exit(1)
 			}
 		},
 	}
-	createInstanceCmd.Flags().StringVar(&hostArg, "host", "h", "firecracker's host")
-	createInstanceCmd.Flags().StringVar(&hostArg, "instance-ip", "i", "instance's ip address")
+	//createInstanceCmd.Flags().StringVar(&hostArg, "host", "h", "firecracker's host")
 	rootCmd.AddCommand(createInstanceCmd)
 
 	return rootCmd.Execute()

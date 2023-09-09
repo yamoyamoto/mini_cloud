@@ -72,11 +72,15 @@ func CreateInstance(c echo.Context) error {
 
 	time.Sleep(5 * time.Second)
 
+	if len(m.Cfg.NetworkInterfaces) == 0{
+		return fmt.Errorf("Failed to get network interface")
+	}
+	
 	log.Printf("Virtual machine has started. ip address: %s", m.Cfg.NetworkInterfaces[0].StaticConfiguration.IPConfiguration.IPAddr.IP)
 
 	c.JSON(200, CreateInstanceResponse{
 		IpAddress: m.Cfg.NetworkInterfaces[0].StaticConfiguration.IPConfiguration.IPAddr.IP.String(),
 	})
-	
+
 	return nil
 }

@@ -13,7 +13,7 @@ import (
 
 func main() {
 	e := echo.New()
-	e.GET("/create-instance", CreateInstance)
+	e.POST("/create-instance", CreateInstance)
 	e.Logger.Fatal(e.Start(":1323"))
 }
 
@@ -70,7 +70,7 @@ func CreateInstance(c echo.Context) error {
 		return fmt.Errorf("Failed to start machine: %v", err)
 	}
 
-	if len(m.Cfg.NetworkInterfaces) == 0{
+	if len(m.Cfg.NetworkInterfaces) == 0 {
 		return fmt.Errorf("Failed to get network interface")
 	}
 

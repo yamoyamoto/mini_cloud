@@ -1,0 +1,3 @@
+[build]
+  delay = 1
+  kill_delay = 10
